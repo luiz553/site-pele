@@ -1,21 +1,24 @@
-import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { About } from './components/About';
-import { Services } from './components/Services';
-import { Gallery } from './components/Gallery';
-import { Contact } from './components/Contact';
-import { Footer } from './components/Footer';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Agendamento from "./pages/Agendamento";
+import AdminLogin from "./pages/AdminLogin";
+import AdminLayout from "./pages/AdminLayout";
+import AdminDashboard from "./pages/AdminDashboard";
 
 export default function App() {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <Hero />
-      <About />
-      <Services />
-      <Gallery />
-      <Contact />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {/* SITE */}
+        <Route path="/" element={<Agendamento />} />
+
+        {/* ADMIN */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="dashboard" element={<AdminDashboard />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
