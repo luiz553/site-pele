@@ -5,3 +5,11 @@
 
   createRoot(document.getElementById("root")!).render(<App />);
   
+  <Route path="/admin" element={<AdminLogin />} />
+
+<Route element={<AdminRoutes />}>
+  <Route path="/admin" element={<AdminLayout />}>
+    <Route path="dashboard" element={<AdminDashboard />} />
+    <Route path="agendamentos" element={<AdminAgendamentos />} />
+  </Route>
+</Route>
