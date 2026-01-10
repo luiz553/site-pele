@@ -1,32 +1,38 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
 
+
+
+
 export default function AdminDashboard() {
   const [agendamentos, setAgendamentos] = useState<any[]>([]);
 
   useEffect(() => {
-    buscarAgendamentos();
+    fetchAgendamentos();
   }, []);
 
-  async function buscarAgendamentos() {
+  async function fetchAgendamentos() {
     const { data, error } = await supabase
       .from("agendamentos")
       .select("*")
-      .order("data", { ascending: true });
+      .order("created_at", { ascending: false });
 
-    if (!error) setAgendamentos(data || []);
+    if (!error && data) {
+      setAgendamentos(data);
+    }
   }
 
   return (
-    <div style={{ padding: 40 }}>
-      <h1>Painel Administrativo</h1>
+    <div>
+      <h1>Admin - Agendamentos</h1>
 
-      {agendamentos.map(item => (
-        <div key={item.id} style={{ borderBottom: "1px solid #ccc", marginBottom: 10 }}>
-          <p><strong>Nome:</strong> {item.nome_cliente}</p>
-          <p><strong>Email:</strong> {item.email}</p>
-          <p><strong>Serviço:</strong> {item.servico}</p>
-          <p><strong>Data:</strong> {item.data}</p>
+      {agendamentos.map((a) => (
+        <div key={a.id} style={{ border: "1px solid #ccc", marginBottom: 10, padding: 10 }}>
+          <p><strong>Nome:</strong> {a.nome}</p>
+          <p><strong>Email:</strong> {a.email}</p>
+          <p><strong>Serviço:</strong> {a.servico}</p>
+          <p><strong>Data:</strong> {a.data}</p>
+          <p><strong>Horário:</strong> {a.horario}</p>
         </div>
       ))}
     </div>

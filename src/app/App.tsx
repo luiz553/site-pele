@@ -1,23 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Agendamento from "./pages/Agendamento";
-import AdminLogin from "./pages/AdminLogin";
-import AdminLayout from "./pages/AdminLayout";
+import Agendamentos from "./pages/Agendamentos";
 import AdminDashboard from "./pages/AdminDashboard";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* SITE */}
-        <Route path="/" element={<Agendamento />} />
+        {/* Site do cliente */}
+        <Route path="/" element={<Agendamentos />} />
 
-        {/* ADMIN */}
-        <Route path="/admin/login" element={<AdminLogin />} />
-
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route path="dashboard" element={<AdminDashboard />} />
-        </Route>
+        {/* Painel admin */}
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
     </BrowserRouter>
   );
